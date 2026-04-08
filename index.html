@@ -15,11 +15,51 @@
 
 </head>
 <body>
+    <h2>Login Form</h2>
     <form>
         <label for="">Username</label>
             <br>
-            <input type="text" id="uname" class="form-control" placeholder="Enter here" required>
+            <input type="text" id="uname" class="form-control" placeholder="Enter here" required><br>
+
+            <label for="pwd">Password</label>
             <br>
+            <input type="password" id="pwd" class="form-control" placeholder="Enter here" required>
+
+            <p id="display"></p>
+            <input type="button" name="button" id="loginBTN" value="Login" class="btn btn-info rounded-5" onclick="authenticate()">
     </form>
+
+    <script>
+        let attempt_counter = 0;
+        function authenticate(){}
+        let username = document.getElementById("uname").value;
+            let pwd = document.getElementById("pwd").value;
+            let granted = "Welcome " + username + "!";
+            let denied = "Access denied. Account locked after 3 attempts!";
+
+            while (attempt_counter < 3) {
+        if (username === "mrbeast67" && pwd === "12345678") {
+            alert(granted);
+            attempt_counter = 0; // reset attempts after successful login
+            document.getElementById("display").innerHTML = "";
+            window.location.href = "dashboard.html";
+
+            break; // stop loop
+        }
+
+        else {
+            attempt_counter++;
+            document.getElementById("display").innerHTML =
+                "Incorrect username and/or password. Attempt " + attempt_counter + " of 3 ";
+            break; // stop loop for this click
+        }
+        
+    if (attempt_counter >= 3) {
+                alert(denied);
+                document.getElementById("loginBTN").disabled = true; // disable button
+            }
+        }
+    </script>
+
 </body>
 </html>
